@@ -18,17 +18,47 @@ https://leetcode.com/problems/count-of-smaller-numbers-after-self/
 '''
 class Solution:
     def countSmaller(self, nums: List[int]) -> List[int]:
-	'''
-        This solution is TLE for 1 test case have a solution of traversing reverse in mind might work better
-	'''
-        retVal, count = [], 0
-        for i in range(len(nums)):
-            count = 0
-            for j in range(i+1,len(nums)):
-                if nums[i] > nums[j]:
-                    count += 1
-            retVal.append(count)
-        return retVal
+        # Accepted Solution
+
+        counts = []
+        done = []
+        for num in nums[::-1]:
+            counts.append(bisect.bisect_left(done, num))
+            done.insert(counts[-1], num)
+        return counts[::-1]
+
+	# Insertion Sort method
+  
+        # retVal = []
+        # sorte = []
+        # if nums:
+        #     retVal = [0]
+        #     sorte.append(nums[-1])
+        # for i in range(len(nums)-2,-1,-1):
+        #     j = 0
+        #     while j < len(sorte):
+        #         if sorte[j] < nums[i]:
+        #             j +=1
+        #         else:
+        #             break
+        #     retVal.insert(0, j)
+        #     sorte.insert(j,nums[i])
+        #     #print(sorte, retVal)
+        # return retVal
+
+	# TLE Solution
+
+        # retVal, count = [], 0
+        # for i in range(len(nums)):
+        #     count = 0
+        #     for j in range(i+1,len(nums)):
+        #         if nums[i] > nums[j]:
+        #             count += 1
+        #     retVal.append(count)
+        # return retVal
+
+        # Initial attempt
+        
         # retVal, count = [], 0
         # for i in range(1,len(nums)):
         #     if nums[i]<nums[0]:
