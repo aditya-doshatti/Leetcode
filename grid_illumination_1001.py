@@ -38,6 +38,38 @@ https://leetcode.com/problems/grid-illumination/
 '''
 class Solution:
     def gridIllumination(self, N: int, lamps: List[List[int]], queries: List[List[int]]) -> List[int]:
+        rowC, colC, diaC, antiDiaC = defaultdict(int), defaultdict(int), defaultdict(int), defaultdict(int)
+        retVal = []
+        for l in lamps:
+            rowC[l[0]] += 1
+            colC[l[1]] += 1
+            diaC[l[0]+l[1]] += 1
+            antiDiaC[l[0]-l[1]] += 1
+        for q in queries:
+            #print(lamps, rowC, colC, diaC, antiDiaC)
+            if rowC[q[0]] or colC[q[1]] or diaC[q[0] + q[1]] or antiDiaC[q[0] - q[1]]:
+                retVal.append(1)
+                i = 0
+                while i < len(lamps):
+                    lamp = lamps[i]
+                    #print(lamp, i, q)
+                    if lamp[0] == q[0] or lamp[0]-1 == q[0] or lamp[0]+1 == q[0]:
+                        if lamp[1] == q[1]  or lamp[1]-1 == q[1] or lamp[1]+1 == q[1]:
+                            lamps.pop(i) 
+                            rowC[lamp[0]] -= 1
+                            colC[lamp[1]] -= 1
+                            diaC[lamp[0]+lamp[1]] -= 1
+                            antiDiaC[lamp[0]-lamp[1]] -= 1                            
+                            i -=1
+                    i +=1 
+            else:
+                retVal.append(0)
+        return retVal
+
+'''
+ This was brute force, TLE
+
+    def gridIllumination(self, N: int, lamps: List[List[int]], queries: List[List[int]]) -> List[int]:
         retVal = []
         for q in queries:
             #print(lamps)
@@ -86,3 +118,4 @@ class Solution:
                     lamps.pop(i) 
                     i -=1
             i +=1        
+'''
