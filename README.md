@@ -1,2 +1,3 @@
-# Leetcode
-Some Leetcode solutions
+# Leetcode.
+Some  Leetcode solutions in Python.
+
