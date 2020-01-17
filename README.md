@@ -1,3 +1,3 @@
 # Leetcode.
-Some  Leetcode solutions in Python.
+A repository for some  Leetcode solutions in Python.
 
