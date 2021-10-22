@@ -18,6 +18,14 @@ So 'e' must appear before both 'r' and 't'. Therefore "eetr" is also a valid ans
 
 https://leetcode.com/problems/sort-characters-by-frequency/
 '''
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        counter = Counter(s)
+        retVal = ""
+        for val in sorted(counter.items(), key=lambda a:a[1], reverse=True):
+            retVal += val[0]*val[1]
+        return retVal
+'''
 from collections import Counter
 class Solution:
     def frequencySort(self, s: str) -> str:
@@ -30,3 +38,4 @@ class Solution:
             val, char = heapq.heappop(k)
             retVal += ((-1*val)*char)
         return retVal
+'''
