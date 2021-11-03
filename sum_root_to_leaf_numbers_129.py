@@ -33,6 +33,15 @@ https://leetcode.com/problems/sum-root-to-leaf-numbers/
 
 class Solution:
     def sumNumbers(self, root: TreeNode) -> int:
+        def dfs(root, path_sum):
+            if not root:
+                return 0
+            if (root.left is None) and (root.right is None):
+                return path_sum*10 + root.val
+            return dfs(root.left, path_sum*10 + root.val) + \
+        dfs(root.right, path_sum*10 + root.val)
+        return dfs(root, 0)
+    '''
         lst, retVal, retlist = "",0, []
         if root != None:
             self.helper(root, lst,retlist)
@@ -49,3 +58,4 @@ class Solution:
             lst+= str(root.val)
             self.helper(root.left, lst, retVal)
             self.helper(root.right, lst, retVal)
+    '''
