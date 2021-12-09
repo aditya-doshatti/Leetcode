@@ -21,6 +21,18 @@ https://leetcode.com/problems/jump-game-iii/
 '''
 class Solution:
     def canReach(self, arr: List[int], start: int) -> bool:
+        visited = set()
+        def helper(ind):
+            nonlocal visited
+            if ind in visited:
+                return 
+            if 0 <= ind < len(arr):
+                if arr[ind] == 0:
+                    return True
+                visited.add(ind)
+                return  helper(ind + arr[ind]) or helper(ind - arr[ind])
+        return helper(start)
+        '''
         dest, pos, visited = set(), [], [False] * len(arr)
         for i,val in enumerate(arr):
             if val == 0:
@@ -47,3 +59,4 @@ class Solution:
                 if pos[ele][1] != -1:
                     q.append(pos[ele][1]) 
         return False
+        '''
